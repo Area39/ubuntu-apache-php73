@@ -1,0 +1,10 @@
+version: '2'
+services:
+  linuxapachephp73:
+    build:
+      context: ./images/linux-apache-php73
+      dockerfile: Dockerfile
+      args:
+        - UID
+        - GID
+    image: subbe/ubuntu-apache-php731
