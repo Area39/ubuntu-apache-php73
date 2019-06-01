@@ -48,13 +48,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY /images/execute.sh /var/exec/execute.sh
+ADD /images/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2
 ADD /images/etc/php/7.3/apache2/conf.d/docker-php-ext-xdebug.ini /etc/php/7.3/apache2/conf.d/
-ADD /images/etc/php/7.3/apache2/conf.d/docker-php.ini /etc/php/7.3/apache2/conf.d/
 
 RUN a2enmod php7.3 rewrite
-
-RUN sed -i "s/extension=json.so;" /etc/php/7.3/apache2/php.ini 
-RUN sed -i "s/extension=tokenizer.so;" /etc/php/7.3/apache2/php.ini 
 
 # Update the PHP.ini file, enable <? ?> tags and quieten logging.
 RUN sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php/7.3/apache2/php.ini 
