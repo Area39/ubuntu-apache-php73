@@ -41,11 +41,15 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     php-imagick \
     php-memcached \
     php-redis \
-    php-xdebug \
+#    php-xdebug \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && apt-get remove -y --purge software-properties-common \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN docker-php-ext-install pdo pdo_mysql xdebug \
+    && docker-php-ext-enable pdo pdo_mysql xdebug
+
 
 COPY /images/execute.sh /var/exec/execute.sh
 ADD /images/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2
