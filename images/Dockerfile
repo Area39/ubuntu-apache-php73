@@ -13,7 +13,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 RUN LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
 
 COPY images/tzdata.sh /var/exec/tzdata.sh
-RUN /var/exec/tzdata.sh
+RUN chmod +x /var/exec/tzdata.sh \
+    && /var/exec/tzdata.sh
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     vim \
