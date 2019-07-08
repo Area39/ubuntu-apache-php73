@@ -33,6 +33,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     php7.3-xml \
     php7.3-mbstring \
     php7.3-mysql \
+    php7.3-sqlite3 \
     php7.3-zip \
     php7.3-xmlrpc \
     php7.3-tidy \
@@ -47,8 +48,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN docker-php-ext-install pdo pdo_mysql \
-    && docker-php-ext-enable pdo pdo_mysql 
+RUN phpenmod -v 7.3 -s apache2 pdo pdo_mysql pdo_sqlite
 
 
 COPY /images/execute.sh /var/exec/execute.sh
