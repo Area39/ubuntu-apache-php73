@@ -12,6 +12,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 RUN LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
 
+COPY images/tzdata.sh /var/exec/tzdata.sh
+RUN /var/exec/tzdata.sh
+
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
     vim \
     curl \
@@ -90,6 +93,7 @@ RUN . $NVM_DIR/nvm.sh \
 
 RUN touch $HOME/.bash_profile \
     && echo "source ~/.bashrc" >> $HOME/.bash_profile
+    && echo "cd /var/www" >> $HOME/.bash_profile
 
 USER appuser
 ENV METHOD script
