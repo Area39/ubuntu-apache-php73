@@ -92,14 +92,14 @@ RUN . $NVM_DIR/nvm.sh \
     && nvm use default
 
 RUN touch $HOME/.bash_profile \
-    && echo "source ~/.bashrc" >> $HOME/.bash_profile
+    && echo "source ~/.bashrc" >> $HOME/.bash_profile \
     && echo "cd /var/www" >> $HOME/.bash_profile
 
 USER appuser
 ENV METHOD script
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 RUN . $NVM_DIR/nvm.sh
-RUN touch $HOME/.bash_profile && echo "source ~/.bashrc" >> $HOME/.bash_profile
+#RUN touch $HOME/.bash_profile && echo "source ~/.bashrc" >> $HOME/.bash_profile
 
 USER root
 
