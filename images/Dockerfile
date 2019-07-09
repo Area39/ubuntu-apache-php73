@@ -15,13 +15,9 @@ RUN LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
 #COPY images/tzdata.sh /var/exec/tzdata.sh
 #RUN chmod +x /var/exec/tzdata.sh \
 #    && /var/exec/tzdata.sh
-ENV TZ 'Indian/Maldives'
-RUN echo $TZ > /etc/timezone \
-    && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata \
-    && rm /etc/localtime \
-    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
-    && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure -f tzdata \
-    && apt-get clean
+ENV TZ='Indian/Maldives'
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo $TZ > /etc/timezone
 
 #RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
 #    vim \
