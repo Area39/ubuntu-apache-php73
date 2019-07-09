@@ -55,7 +55,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN phpenmod -v 7.3 -s apache2 pdo pdo_mysql pdo_sqlite
+# Install Mysql
+RUN docker-php-ext-install pdo pdo_mysql pdo_sqlite
+#RUN phpenmod -v 7.3 -s apache2 pdo pdo_mysql pdo_sqlite
 
 
 COPY /images/execute.sh /var/exec/execute.sh
