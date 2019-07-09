@@ -19,45 +19,45 @@ ENV TZ='Indian/Maldives'
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
-#RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
-#    vim \
-#    curl \
-#    zip \
-#    imagemagick \
-#    mysql-client \
-#    apache2 \
-#    libapache2-mod-php7.3 \
-#    nano \
-#    pkg-config \
-#    composer \
-#    libmcrypt-dev \
-#    php7.3 \
-#    php7.3-cli \
-#    php7.3-soap \
-#    php7.3-curl \
-#    php7.3-gd \
-#    php7.3-json \
-#    php7.3-xml \
-#    php7.3-mbstring \
-#    php7.3-mysql \
-#    php7.3-sqlite3 \
-#    php7.3-zip \
-#    php7.3-xmlrpc \
-#    php7.3-tidy \
-#    php7.3-dev \
-#    php7.3-common \
-#    php-imagick \
-#    php-memcached \
-#    php-redis \
-#    php-xdebug \
-#    && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
-#    && apt-get remove -y --purge software-properties-common \
-#    && apt-get clean \
-#    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-#
-##RUN phpenmod -v 7.3 -s apache2 pdo pdo_mysql pdo_sqlite
-#
-#
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    vim \
+    curl \
+    zip \
+    imagemagick \
+    mysql-client \
+    apache2 \
+    libapache2-mod-php7.3 \
+    nano \
+    pkg-config \
+    composer \
+    libmcrypt-dev \
+    php7.3 \
+    php7.3-cli \
+    php7.3-soap \
+    php7.3-curl \
+    php7.3-gd \
+    php7.3-json \
+    php7.3-xml \
+    php7.3-mbstring \
+    php7.3-mysql \
+    php7.3-sqlite3 \
+    php7.3-zip \
+    php7.3-xmlrpc \
+    php7.3-tidy \
+    php7.3-dev \
+    php7.3-common \
+    php-imagick \
+    php-memcached \
+    php-redis \
+    php-xdebug \
+    && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
+    && apt-get remove -y --purge software-properties-common \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+#RUN phpenmod -v 7.3 -s apache2 pdo pdo_mysql pdo_sqlite
+
+
 #COPY /images/execute.sh /var/exec/execute.sh
 #ADD /images/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2
 #ADD /images/etc/php/7.3/apache2/conf.d/docker-php-ext-xdebug.ini /etc/php/7.3/apache2/conf.d/
