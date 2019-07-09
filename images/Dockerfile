@@ -20,6 +20,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     vim \
     curl \
     zip \
+    unzip \
+    git \
+    sqlite3 \
     imagemagick \
     mysql-client \
     apache2 \
@@ -30,6 +33,10 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     libmcrypt-dev \
     php7.3 \
     php7.3-cli \
+    php7.3-gd \
+    php7.3-bcmath \
+    php7.3-imap \
+    php7.3-xml \
     php7.3-soap \
     php7.3-curl \
     php7.3-gd \
@@ -56,8 +63,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 COPY /images/execute.sh /var/exec/execute.sh
 ADD /images/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2
 ADD /images/etc/php/7.3/apache2/conf.d/docker-php-ext-xdebug.ini /etc/php/7.3/apache2/conf.d/
-
-RUN docker-php-ext-install pdo_mysql
 
 RUN a2enmod php7.3 rewrite
 
@@ -101,7 +106,6 @@ USER appuser
 ENV METHOD script
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 RUN . $NVM_DIR/nvm.sh
-#RUN touch $HOME/.bash_profile && echo "source ~/.bashrc" >> $HOME/.bash_profile
 
 USER root
 
