@@ -63,14 +63,17 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 COPY /images/execute.sh /var/exec/execute.sh
 ADD /images/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2
-ADD /images/etc/php/7.3/apache2/conf.d/docker-php-ext-xdebug.ini /etc/php/7.3/apache2/conf.d/
+ADD /images/etc/php/7.3/apache2/conf.d/ /etc/php/7.3/apache2/conf.d/
 
 RUN a2enmod php7.3 rewrite
 
 # Update the PHP.ini file, enable <? ?> tags and quieten logging.
-RUN sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php/7.3/apache2/php.ini
-RUN sed -i "s/error_reporting = .*$/error_reporting = E_ERROR | E_WARNING | E_PARSE/" /etc/php/7.3/apache2/php.ini
-RUN sed -i "s/;extension=openssl/extension=openssl/" /etc/php/7.3/apache2/php.ini \
+RUN sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php/7.3/apache2/php.ini \
+    && sed -i "s/error_reporting = .*$/error_reporting = E_ERROR | E_WARNING | E_PARSE/" /etc/php/7.3/apache2/php.ini \
+    && sed -i "s/;extension=openssl/extension=openssl/" /etc/php/7.3/apache2/php.ini \
+    && echo "extension=json" >> /etc/php/7.3/apache2/php.ini \
+    && echo "extension=tokenizer" >> /etc/php/7.3/apache2/php.ini \
+    && echo "extension=pdo" >> /etc/php/7.3/apache2/php.ini \
     && sed -i "s/;extension=pdo_mysql/extension=pdo_mysql/" /etc/php/7.3/apache2/php.ini \
     && sed -i "s/;extension=pdo_sqlite/extension=pdo_sqlite/" /etc/php/7.3/apache2/php.ini \
     && sed -i "s/;extension=pdo_mysql/extension=pdo_mysql/" /etc/php/7.3/apache2/php.ini
