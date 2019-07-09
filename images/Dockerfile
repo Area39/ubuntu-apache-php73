@@ -97,7 +97,8 @@ RUN . $NVM_DIR/nvm.sh \
 
 RUN touch $HOME/.bash_profile \
     && echo "source ~/.bashrc" >> $HOME/.bash_profile \
-    && echo "cd /var/www" >> $HOME/.bash_profile
+    && echo "cd /var/www" >> $HOME/.bash_profile \
+    && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 USER appuser
 ENV METHOD script
