@@ -12,9 +12,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 RUN LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
 
-#COPY images/tzdata.sh /var/exec/tzdata.sh
-#RUN chmod +x /var/exec/tzdata.sh \
-#    && /var/exec/tzdata.sh
 ENV TZ='Indian/Maldives'
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
@@ -54,10 +51,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     && apt-get remove -y --purge software-properties-common \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Install Mysql
-RUN docker-php-ext-install pdo pdo_mysql pdo_sqlite
-#RUN phpenmod -v 7.3 -s apache2 pdo pdo_mysql pdo_sqlite
 
 
 COPY /images/execute.sh /var/exec/execute.sh
