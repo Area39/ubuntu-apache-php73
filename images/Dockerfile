@@ -43,6 +43,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     php7.3-json \
     php7.3-xml \
     php7.3-mbstring \
+    php7.3-pdo \
     php7.3-mysql \
     php7.3-sqlite3 \
     php7.3-zip \
