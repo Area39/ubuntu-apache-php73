@@ -57,6 +57,8 @@ COPY /images/execute.sh /var/exec/execute.sh
 ADD /images/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2
 ADD /images/etc/php/7.3/apache2/conf.d/docker-php-ext-xdebug.ini /etc/php/7.3/apache2/conf.d/
 
+RUN docker-php-ext-install pdo_mysql
+
 RUN a2enmod php7.3 rewrite
 
 # Update the PHP.ini file, enable <? ?> tags and quieten logging.
