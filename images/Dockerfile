@@ -73,10 +73,7 @@ RUN sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php/7.3/apache2/ph
     && sed -i "s/;extension=openssl/extension=openssl/" /etc/php/7.3/apache2/php.ini \
     && echo "extension=json" >> /etc/php/7.3/apache2/php.ini \
     && echo "extension=tokenizer" >> /etc/php/7.3/apache2/php.ini \
-    && echo "extension=pdo" >> /etc/php/7.3/apache2/php.ini \
-    && sed -i "s/;extension=pdo_mysql/extension=pdo_mysql/" /etc/php/7.3/apache2/php.ini \
-    && sed -i "s/;extension=pdo_sqlite/extension=pdo_sqlite/" /etc/php/7.3/apache2/php.ini \
-    && sed -i "s/;extension=pdo_mysql/extension=pdo_mysql/" /etc/php/7.3/apache2/php.ini
+    && echo "extension=pdo" >> /etc/php/7.3/apache2/php.ini
 
 # Manually set up the apache environment variables
 ENV APACHE_LOG_DIR /var/log/apache2
