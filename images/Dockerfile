@@ -60,11 +60,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
-COPY /images/execute.sh /var/exec/execute.sh
-ADD /images/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2
-ADD /images/etc/php/7.3/apache2/conf.d/ /etc/php/7.3/apache2/conf.d/
-
 RUN a2enmod php7.3 rewrite
 
 # Update the PHP.ini file, enable <? ?> tags and quieten logging.
@@ -75,13 +70,13 @@ RUN sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php/7.3/apache2/ph
     && echo "extension=tokenizer" >> /etc/php/7.3/apache2/php.ini \
     && echo "extension=pdo" >> /etc/php/7.3/apache2/php.ini
 
-# Manually set up the apache environment variables
-ENV APACHE_LOG_DIR /var/log/apache2
-ENV APACHE_LOCK_DIR /var/lock/apache2
-ENV APACHE_PID_FILE /var/run/apache2.pid
+COPY /images/execute.sh /var/exec/execute.sh
+ADD /images/etc/php/7.3/apache2/php.ini /etc/php/7.3/apache2
+ADD /images/etc/php/7.3/apache2/conf.d/ /etc/php/7.3/apache2/conf.d/
 
 RUN if grep -q "^appuser" /etc/group; then echo "Group already exists."; else groupadd -g $GID appuser; fi
 RUN useradd -m -r -u $UID -g appuser appuser
+RUN chown -R appuser:appuser /var/www/
 
 # NVM
 
