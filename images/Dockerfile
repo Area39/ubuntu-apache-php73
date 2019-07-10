@@ -3,6 +3,8 @@ FROM ubuntu:bionic
 ARG UID=1000
 ARG GID=1000
 
+ENV PHP_XDEBUG_REMOTE_HOST="" PHP_XDEBUG_IDEKEY="" PHP_XDEBUG_REMOTE_ENABLE="" PHP_XDEBUG_REMOTE_AUTOSTART="" PHP_XDEBUG_REMOTE_PORT="" TZ="Indian/Maldives"
+
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     build-essential \
     gperf \
@@ -12,7 +14,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 RUN LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
 
-ENV TZ='Indian/Maldives'
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
