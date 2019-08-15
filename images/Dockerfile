@@ -98,10 +98,10 @@ RUN . $NVM_DIR/nvm.sh \
     && nvm use v7.7.3  && npm install grunt-cli gulp-cli babel-cli yarn webpack webpack-cli -g \
     && nvm use default
 
-RUN touch $HOME/.bash_profile \
-    && echo "source ~/.bashrc" >> $HOME/.bash_profile \
-    && echo "cd /var/www" >> $HOME/.bash_profile \
-    && echo "ServerName localhost" >> /etc/apache2/apache2.conf
+#RUN touch $HOME/.bash_profile \
+#    && echo "cd /var/www" >> $HOME/.bash_profile \
+#    && echo "source ~/.bashrc" >> $HOME/.bash_profile \
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 USER appuser
 ENV METHOD script
@@ -118,5 +118,8 @@ RUN git init /usr/local/git-dummy
 ENV GIT_DIR /usr/local/git-dummy
 
 # NVM
+
+# change default directory for ssh terminal
+RUN echo 'cd /var/www' >> ~/.bashrc
 
 CMD ["/bin/bash","/var/exec/execute.sh"]
